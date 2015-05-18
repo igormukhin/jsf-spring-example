@@ -8,19 +8,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan("de.igormukhin.examples")
+@ComponentScan
 public class ApplicationConfiguration {
     
-    @Bean
-    public FacesViewScope facesViewScope() {
-        return new FacesViewScope();
-    }
-
 	@Bean
-	public CustomScopeConfigurer customScopeConfigurer() {
+	public static CustomScopeConfigurer customScopeConfigurer() {
 		CustomScopeConfigurer configurer = new CustomScopeConfigurer();
         configurer.setScopes(Collections.<String, Object>singletonMap(
-                FacesViewScope.NAME, facesViewScope()));
+                FacesViewScope.NAME, new FacesViewScope()));
 		return configurer;
 	}
 }
